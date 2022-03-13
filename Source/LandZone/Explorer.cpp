@@ -2,6 +2,7 @@
 
 
 #include "Explorer.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AExplorer::AExplorer()
@@ -9,6 +10,7 @@ AExplorer::AExplorer()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
+	GetCharacterMovement()->SetWalkableFloorAngle(70);
 	
 	//TODO InventoryCapacity initialize
 }
@@ -64,11 +66,13 @@ void AExplorer::MoveRight(float Scale)
 
 void AExplorer::LookUp(float Scale)
 {
+	Scale *= GetWorld()->GetDeltaSeconds() * Sensitivity;
 	AddControllerPitchInput(Scale);
 }
 
 void AExplorer::Turn(float Scale)
 {
+	Scale *= GetWorld()->GetDeltaSeconds() * Sensitivity;
 	AddControllerYawInput(Scale);
 }
 
@@ -104,12 +108,12 @@ void AExplorer::StopProning()
 
 void AExplorer::StartSprinting()
 {
-	
+	GetCharacterMovement()->MaxWalkSpeed *= 2;
 }
 
 void AExplorer::StopSprinting()
 {
-	
+	GetCharacterMovement()->MaxWalkSpeed /= 2;
 }
 
 int32 AExplorer::GetInventoryCapacity()

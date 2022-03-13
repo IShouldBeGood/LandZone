@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "GameFramework/CharacterMovementComponent.h"
 #include "Item.h"
 #include "Inventory.h"
 #include "CoreMinimal.h"
@@ -63,7 +62,7 @@ protected:
 private:
 	UPROPERTY(EditAnywhere)
 	int32 InventoryCapacity = 10;
-	
+	float Sensitivity = 50.f;
 	UInventory* Inventory;
 	
 #define HotbarLength 9
