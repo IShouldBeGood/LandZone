@@ -3,3 +3,7 @@
 
 #include "LandZoneGameModeBase.h"
 
+ALandZoneGameModeBase::ALandZoneGameModeBase()
+{
+	DefaultPawnClass = AExplorer::StaticClass();
+}
